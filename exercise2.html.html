@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Entry Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px;}
+    input { margin: 5px; }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+    }
+    th { background-color: #eea5a5; }
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .sort-btn {
+      background-color: lightblue;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    th{
+      width: 90px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Student Information</h2>
+
+  <form id="studentForm">
+    <input type="text" id="name" placeholder="Student Name" required>
+    <input type="text" id="matric" placeholder="Matric Number" required><br>
+    <input type="number" id="bm" placeholder="Bahasa Melayu" required>
+    <input type="number" id="math" placeholder="Matematik" required>
+    <input type="number" id="sej" placeholder="Sejarah" required>
+    <input type="number" id="bi" placeholder="Bahasa Inggeris" required>
+    <button type="submit" class="submit-btn">Add Student</button>
+  </form>
+
+  <h3>Student List</h3>
+  <button class="sort-btn", onclick="sortByAverage()">Sort by Average</button>
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Matric No</th>
+        <th>BM</th>
+        <th>Math</th>
+        <th>Sejarah</th>
+        <th>BI</th>
+        <th>Average</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Student entries will appear here -->
+    </tbody>
+  </table>
+
+  <script>
+    document.getElementById('studentForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const name = document.getElementById('name').value;
+      const matric = document.getElementById('matric').value;
+      const bm = parseFloat(document.getElementById('bm').value);
+      const math = parseFloat(document.getElementById('math').value);
+      const sej = parseFloat(document.getElementById('sej').value);
+      const bi = parseFloat(document.getElementById('bi').value);
+
+      const average = ((bm + math + sej + bi) / 4).toFixed(2);
+
+      const row =  document.createElement('tr');
+      row.innerHTML = `
+        <td>${name}</td>
+        <td>${matric}</td>
+        <td>${bm}</td>
+        <td>${math}</td>
+        <td>${sej}</td>
+        <td>${bi}</td>
+        <td>${average}</td>
+        <td><button class="delete-btn">Delete</button></td>
+      `;
+
+      row.querySelector('.delete-btn').addEventListener('click', function() {
+        row.remove();
+      });
+
+      document.querySelector('#studentTable tbody').appendChild(row);
+      document.getElementById('studentForm').reset(); 
+    });
+
+    function sortByAverage() {
+      const tbody = document.querySelector('#studentTable tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        const avgA = parseFloat(a.cells[6].textContent);
+        const avgB = parseFloat(b.cells[6].textContent);
+        return avgA - avgB;
+      });
+
+      tbody.innerHTML = ''; 
+      rows.forEach(row => {
+        tbody.appendChild(row);
+      });
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Example</title>
+  </head>
+  <body id="bgcolor">
+    <form id="myForm" name="myForm" method="post">
+      <select id="site" size="1">
+        <option value="http://www.utem.edu.my">UTeM</option>
+        <option value="http://ftmk.utem.edu.my">FTMK</option>
+        <option value="http://www.utem.edu.my">UTeM</option>
+      </select>
+      <select  id="color" size="1">
+        <option value="pink">Pink</option>
+        <option value="yellow">Yellow</option>
+        <option value="red">Red</option>
+      </select>
+      <p>
+        <label for="fullname">Student Name: </label>
+        <input type="text" id="fullname" required />
+      </p>
+      <p>
+        <label for="matricNo">Matric Number: </label>
+        <input type="text" id="matricNo" required />
+      </p>
+      <p>
+        <label for="number1">Number 1:</label>
+        <input type="number" id="number1" required />
+      </p>
+      <p>
+        <label for="number2">Number 2:</label>
+        <input type="number" id="number2" />
+      </p>
+      <p>
+        <label for="number3">Number 3:</label>
+        <input type="number" name="" id="number3" />
+      </p>
+      <p>
+        <label for="food">Food:</label>
+        <input type="checkbox" name="myFood" id="" value="Nasi Lemak" />Nasi
+        Lemak
+        <input type="checkbox" name="myFood" id="" value="Nasi Ayam" />Nasi Ayam
+        <input type="checkbox" name="myFood" id="" value="Nasi Itik" />Nasi Itik
+      </p>
+      <p>
+        <label for="gender">Gender</label>
+        <input type="radio" name="gender" id="" value="Male" />male
+        <input type="radio" name="gender" id="" value="Female" />female
+      </p>
+      <p>
+        <input type="submit" name="" id="submit" value="Submit" />
+        <input type="reset" name="" id="reset" value="Clear Me" />
+      </p>
+    </form>
+    <h2 id="output"></h2>
+    <p id="date"></p>
+    <p id="OutputName"></p>
+
+    <p>
+      <label for="resultName">Full name: </label>
+      <input type="text" name="" id="resultName" readonly disabled />
+    </p>
+    <p>
+      <label for="resultMatricNo">Matric No: </label>
+      <input type="text" id="resultMatricNo" readonly disabled />
+    </p>
+    <p>
+      <label for="Sum">Sum: </label>
+      <input type="text" name="" id="Sum" readonly disabled />
+    </p>
+    <p>
+      <label for="Average">Average: </label>
+      <input type="text" name="" id="Average" readonly disabled />
+    </p>
+    <p>
+      <label for="Product">Product: </label>
+      <input type="text" name="" id="Product" readonly disabled />
+    </p>
+    <p>
+      <label for="Largest">Largest: </label>
+      <input type="text" name="" id="Largest" readonly disabled />
+    </p>
+    <p>
+      <label for="Smallest">Smallest: </label>
+      <input type="text" name="" id="Smallest" readonly disabled />
+    </p>
+    <p>
+      <label for="food">Faviorite Food: </label>
+      <input type="text" name="" id="food" readonly disabled />
+    </p>
+    <p>
+      <label for="ResultGender">Gender:</label>
+      <input type="text" name="" id="ResultGender" readonly disabled />
+    </p>
+    <script src="script.js"></script>
+  </body>
+</html>
