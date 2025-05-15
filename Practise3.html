@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markah</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+      }
+      th {
+        background-color: aqua;
+      }
+      .delete-btn {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .sortA-btn,
+      .sortT-btn {
+        background-color: rgb(47, 47, 22);
+        color: white;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+      th {
+        width: 90px;
+        text-align: center;
+      }
+      .zebra {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Student Markah</h2>
+    <form id="studentForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="number" id="age" placeholder="Your Age" required />
+      <input type="text" id="matricNo" placeholder="Your Matric No" required />
+      <br />
+      <input type="number" id="bm" placeholder="BM" required />
+      <input type="number" id="mm" placeholder="MM" required />
+      <input type="number" id="sej" placeholder="SEJ" required />
+      <input type="number" id="bi" placeholder="BI" required />
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <button class="sortA-btn" onclick="sortByAverage()">Sort by Average</button>
+    <button class="sortT-btn" onclick="sortByTotal()">Sort by Total</button>
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Matric No</th>
+          <th>BM</th>
+          <th>MM</th>
+          <th>SEJ</th>
+          <th>BI</th>
+          <th>Average</th>
+          <th>Total Markah</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      document
+        .getElementById("studentForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const age = document.getElementById("age").value;
+          const matric = document.getElementById("matricNo").value;
+          const bm = parseFloat(document.getElementById("bm").value);
+          const mm = parseFloat(document.getElementById("mm").value);
+          const sej = parseFloat(document.getElementById("sej").value);
+          const bi = parseFloat(document.getElementById("bi").value);
+
+          const average = ((bm + mm + sej + bi) / 4).toFixed(2);
+          const sum = bm + mm + sej + bi;
+
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${name}</td>
+            <td>${age}</td>
+            <td>${matric}</td>
+            <td>${bm}</td>
+            <td>${mm}</td>
+            <td>${sej}</td>
+            <td>${bi}</td>
+            <td>${average}</td>
+            <td>${sum}</td>
+            <td> <button class="delete-btn">Detele</button></td>
+            `;
+
+          row
+            .querySelector(".delete-btn")
+            .addEventListener("click", function () {
+              row.remove();
+            });
+
+          document.querySelector("#studentTable tbody").appendChild(row);
+          document.getElementById("studentForm").reset();
+          applyZebraEffect();
+        });
+
+      function sortByAverage() {
+        const tbody = document.querySelector("#studentTable tbody");
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        rows.sort((a, b) => {
+          const avgA = parseFloat(a.cells[7].textContent);
+          const avgB = parseFloat(b.cells[7].textContent);
+          return avgB - avgA;
+        });
+
+        tbody.innerHTML = "";
+        rows.forEach((row) => {
+          tbody.appendChild(row);
+        });
+      }
+
+      function sortByTotal() {
+        const tbody = document.querySelector("#studentTable tbody");
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        rows.sort((a, b) => {
+          totA = parseFloat(a.cells[8].textContent);
+          totB = parseFloat(b.cells[8].textContent);
+          return totB - totA;
+        });
+
+        tbody.innerHTML = "";
+        rows.forEach((row) => {
+          tbody.appendChild(row);
+        });
+      }
+
+      function applyZebraEffect() {
+        const rows = document.querySelectorAll("#studentTable tbody tr");
+        rows.forEach((row, index) => {
+          if (index % 2 === 0) {
+            row.classList.add("zebra"); // Add zebra class to even rows (0-based index)
+          } else {
+            row.classList.remove("zebra"); // Remove zebra class from odd rows
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
